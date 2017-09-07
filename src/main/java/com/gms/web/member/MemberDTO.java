@@ -1,11 +1,13 @@
 package com.gms.web.member;
-import java.io.Serializable;
+
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
-@Data
-public class MemberDTO implements Serializable{
-	private static final long serialVersionUID = 1L;
+@Data @Lazy @Component
+public class MemberDTO {
+
 	private String id, name, password, ssn, gender, regdate, phone, email, major, subject, profile;
 
 }

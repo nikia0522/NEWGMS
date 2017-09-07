@@ -10,7 +10,7 @@ import com.gms.web.common.AuthController;
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	@RequestMapping("/write")
 	public String addBoard() {	
 		return "board/board_write";

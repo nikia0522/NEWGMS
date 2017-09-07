@@ -9,7 +9,6 @@ import com.gms.web.common.HomeController;
 
 @Controller
 @RequestMapping("/grade")
-		
 public class GradeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@RequestMapping("/add")
