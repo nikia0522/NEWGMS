@@ -194,7 +194,7 @@ app.navbar=(function(){
 			app.controller.moveTo('grade', 'delete');
 		});
 		$('.dropdown-menu a').eq( 10 ).on('click',function(){
-			app.controller.moveTo('board', 'write');
+			app.controller.moveTo('board', 'add');
 		});
 		$('.dropdown-menu a').eq( 11 ).on('click',function(){
 			app.controller.moveTo('board', 'list');

@@ -5,34 +5,33 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gms.web.common.AuthController;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	@RequestMapping("/write")
+	@RequestMapping("/add")
 	public String addBoard() {	
-		return "board/board_write";
+		return "auth:board/board_write.tiles";
 	}
 	
 	@RequestMapping("/list")
 	public String listBoard() {
-		return "board/board_list";
+		return "auth:board/board_list.tiles";
 	}
 	
 	@RequestMapping("/detail")
 	public String detailBoard() {
-		return "board/board_detail";
+		return "auth:board/board_detail.tiles";
 	}
 	
 	@RequestMapping("/update")
 	public String updateBoard() {
-		return "board/board_update";
+		return "auth:board/board_update.tiles";
 	}
 	
 	@RequestMapping("/delete")
 	public String deleteBoard() {
-		return "board/board_delete";
+		return "auth:board/board_delete.tiles";
 	}
 }

@@ -46,7 +46,6 @@
 
 <script>
 	app.navbar.init();
-	app.main.init();
 	/* window.onload=navbarLoad();  *///hoisting 문법
 
 /*  	function mainLoad(){ //native JS
