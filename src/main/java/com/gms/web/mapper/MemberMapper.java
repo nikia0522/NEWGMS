@@ -12,7 +12,7 @@ import com.gms.web.member.StudentDTO;
 @Repository
 public interface MemberMapper {
 	public String insert(Map<?, ?>map); // 객체에 대한 setter (void, parameter 있음)
-	public String countMembers(CommandDTO cmd); //getter (return type 있고 parameter 없음)
+	public String countMembers(); //getter (return type 있고 parameter 없음)
 	public List<?> selectAll(CommandDTO cmd); //getter (return type 있고 parameter 없음)
 	public StudentDTO selectById(CommandDTO cmd); //보안사항이 아니기때문에 public으로..
 	public List<?> selectByName(CommandDTO cmd);

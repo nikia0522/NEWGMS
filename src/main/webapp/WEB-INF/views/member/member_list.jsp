@@ -12,6 +12,9 @@
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
+<div style="height: 40px; width:300pxl;">
+	회원수: ${count}
+</div>
 <table id="member_list_tab" style="margin-top:50px">
 	<tr>
 		<th style="width:5%">NO</th>

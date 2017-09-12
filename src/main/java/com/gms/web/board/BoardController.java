@@ -10,26 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/board")
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	@RequestMapping("/add")
-	public String addBoard() {	
-		return "auth:board/board_write.tiles";
-	}
-	
-	@RequestMapping("/list")
-	public String listBoard() {
-		return "auth:board/board_list.tiles";
-	}
-	
-	@RequestMapping("/detail")
-	public String detailBoard() {
-		return "auth:board/board_detail.tiles";
-	}
-	
-	@RequestMapping("/update")
-	public String updateBoard() {
-		return "auth:board/board_update.tiles";
-	}
-	
+
 	@RequestMapping("/delete")
 	public String deleteBoard() {
 		return "auth:board/board_delete.tiles";

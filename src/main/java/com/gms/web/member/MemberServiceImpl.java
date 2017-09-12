@@ -3,21 +3,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.mapper.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gms.web.auth.AuthController;
 import com.gms.web.command.CommandDTO;
 import com.gms.web.grade.MajorDTO;
+import com.gms.web.mapper.MemberMapper;
 import com.gms.web.member.MemberDTO;
 import com.gms.web.member.StudentDTO;
 import com.gms.web.member.MemberService;
 
 @Service
 public class MemberServiceImpl implements MemberService{
-	public static MemberServiceImpl getInstance(){
-		return new MemberServiceImpl();
-	}
-	private MemberServiceImpl(){}
-	
+	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);	
+	@Autowired MemberMapper mapper;
+	@Autowired MemberDTO member;
+	@Autowired CommandDTO cmd;
 	@Override
 	public String addMember(Map<String, Object> map) {
 		System.out.println("member service 진입");
@@ -37,12 +42,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public String countMembers(CommandDTO cmd) {
-		return null;
+	public String countMembers() {
+		String count=mapper.countMembers();
+		return count;
 	}
 	
 	@Override
-	public StudentDTO findById(CommandDTO cmd) {	
+	public StudentDTO findById() {
 		return null;
 	}
 
@@ -66,18 +72,33 @@ public class MemberServiceImpl implements MemberService{
 		return (rs==1)?"실패":"성공";
 	}
 	@Override
-	public Map<String,Object> login(MemberDTO member) {
+	public Map<String,Object> login(CommandDTO cmd) {
 		Map<String,Object> map=new HashMap<>();
-		CommandDTO cmd=new CommandDTO();
-		cmd.setSearch(member.getId());
-		MemberDTO mem=null;
-		System.out.println("아이디야~~" + member.getId());
-		System.out.println("db에서받아온 비번" + mem.getPassword());
-		String page=(mem!=null)?((member.getPassword().equals(mem.getPassword()))?"main":"login_fail"):"join";
-		System.out.println("비번:::::"+member.getPassword());
+		member=mapper.login(cmd);
+		logger.info("cmd Id:"+cmd.getSearch());
+		String page="";
+		String result="";
+		if(member!=null) {
+			if(cmd.getColumn().equals(member.getPassword())) {
+				logger.info("login success");
+				page="auth:common/main.tiles";
+				map.put("user", member);
+				
+			}else {
+				logger.info("wrong pass");
+				page="public:common/login.tiles";
+				result="비밀번호 틀림";
+			}			
+		} else {
+			logger.info("wrong id");
+			page="public:common/login.tiles";
+			result="아이디 없음";
+		}
+//		String page=(member!=null)?((cmd.getSearch().equals(member.getId()))?"":"login_fail"):"join";
 		/*3항 2번 쓴거*/	
 		map.put("page", page);
-		map.put("user", mem);
+		map.put("result", result);
+		map.put("user", member);
 		return map;
 		}
 }

@@ -12,11 +12,8 @@ import lombok.Setter;
 
 @Lazy @Component @Data
 public class CommandDTO implements Commandable{
-	@Getter
-	protected String action, pageNumber, view, column, search;
-	
 	@Getter @Setter
-	protected String dir, startRow, endRow, page;
+	protected String action, pageNumber, view, column, search, dir, startRow, endRow, page;
 	
 	public void setPageNumber(String pageNumber){
 		this.pageNumber=(pageNumber==null)?"1":pageNumber;
