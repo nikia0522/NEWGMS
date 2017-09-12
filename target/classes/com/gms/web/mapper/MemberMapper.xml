@@ -9,6 +9,19 @@
 	</select>
 	<select id="login" resultType="com.gms.web.member.MemberDTO" parameterType="com.gms.web.command.CommandDTO">
 	 Select member_id AS id , name, password, ssn, regdate, phone, email, profile FROM member WHERE member_id=#{search}
-	 
+	</select>
+	<select id="selectAll" resultType="com.gms.web.member.StudentDTO" parameterType="com.gms.web.command.CommandDTO">
+	select c.* 
+		from (select @rnum := @rnum +1 as num, t.* 
+			  from student t, (select @rnum := 0) b ) c
+		where c.num between #{startRow} and #{endRow}
+	</select>
+	<select id="selectByName" resultType="com.gms.web.member.StudentDTO" parameterType="com.gms.web.command.CommandDTO">
+	select t2.*
+		from (select @rnum := @rnum +1 as num, s.*
+			  from student s, (select @rnum := 0) b 
+			  where name like '%${search}%' 
+			  order by num desc) t2  
+		
 	</select>
 </mapper>

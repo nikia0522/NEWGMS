@@ -38,7 +38,7 @@ public class MemberServiceImpl implements MemberService{
 		
 	@Override
 	public List<?> list(CommandDTO cmd) {		
-		return null;
+		return mapper.selectAll(cmd);
 	}
 	
 	@Override
@@ -55,7 +55,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public List<?> findByName(CommandDTO cmd) {
 		System.out.println("findByName("+cmd.getSearch()+")");
-		return null;
+		return mapper.selectByName(cmd);
 		}
 
 	@Override

@@ -7,7 +7,7 @@ var app = app||{};
 app.path=(function(){ //login이후에도 저장되어야할 정보는 앱에 저장
 	var init=function(ctx){ //생성자, init, onCreate, setContentView는 항상 만들어야함.
 		app.session.init(ctx);
-		app.auth.init();
+		/*app.auth.init();*/
 		onCreate();
 	};
 	var onCreate=function(){
@@ -91,7 +91,7 @@ app.main=(function(){
 		});
 		$('.list-group a').eq( 1 ).on('click',function(){
 			alert('1');
-			app.controller.list('member', 'member_list', '1');
+			app.member.list(1);
 		});
 		$('.list-group a').eq( 2 ).on('click',function(){
 			app.controller.moveTo('member', 'member_detail');
@@ -167,7 +167,7 @@ app.navbar=(function(){
 		});
 		$('.dropdown-menu a').eq( 1 ).on('click',function(){
 			alert('1');
-			app.controller.moveTo('member', 'member_list');
+			app.member.list(1);
 		});
 		$('.dropdown-menu a').eq( 2 ).on('click',function(){
 			app.controller.moveTo('member', 'member_detail');
@@ -250,8 +250,12 @@ app.member=(function(){
 	var setContentView=function(){		
 		alert('멤버디테일 진입');
 	};
+	var list=function(pageNumber){
+		location.href=app.path.ctx()+'/member/member_list/'+pageNumber;
+	}
 	return{
-		init : init
+		init : init,
+		list : list
 	};
 })();
 
@@ -299,9 +303,6 @@ app.controller=(function(){
 	var deleteTarget=function(target){
 		prompt(target+"의 ID?");
 	};
-	var list=function(dir,page,pageNumber){
-		location.href=app.path.ctx()+"/member/path"+'/'+dir+"/"+page+"/"+pageNumber;
-	};
 	var updateStudent=function(id,email){
 		alert('수정할 id='+$('#detail_id').text());
 		location.href=app.ctx()+'/'+"member.do?action=update&page=member_update&id="+id+"&email="+email;
@@ -315,8 +316,9 @@ app.controller=(function(){
 		location.href=app.path.ctx()+'/'+"member.do?action=detail&page=member_detail&id="+id;
 	};
 	var searchStudent=function(){
-		var search=document.getElementById('search').value;
-		location.href=app.ctx()+'/'+"member.do?action=search&page=member_list&search="+search;
+		alert('검색버튼 클릭함');
+		var search=$('#search').val();
+		location.href=app.path.ctx()+'/member/search/'+search;
 	};
 
 	return{
@@ -324,7 +326,6 @@ app.controller=(function(){
 		moveTo : moveTo,
 		logout : logout,
 		deleteTarget : deleteTarget,
-		list : list,
 		updateStudent : updateStudent,
 		deleteStudent : deleteStudent,
 		detailStudent : detailStudent,
