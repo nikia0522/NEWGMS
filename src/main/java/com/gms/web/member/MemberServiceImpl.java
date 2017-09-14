@@ -8,10 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gms.web.auth.AuthController;
 import com.gms.web.command.CommandDTO;
 import com.gms.web.grade.MajorDTO;
+import com.gms.web.grade.SubjectDTO;
+import com.gms.web.mapper.GradeMapper;
 import com.gms.web.mapper.MemberMapper;
 import com.gms.web.member.MemberDTO;
 import com.gms.web.member.StudentDTO;
@@ -23,16 +26,21 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired MemberMapper mapper;
 	@Autowired MemberDTO member;
 	@Autowired CommandDTO cmd;
-	@Override
-	public String addMember(Map<String, Object> map) {
-		System.out.println("member service 진입");
-		MemberDTO m=(MemberDTO)map.get("member");
-		System.out.println("넘어온 회원 정보:"+m.toString());
+	@Autowired GradeMapper gmapper;
+	@Autowired SubjectDTO subj;
+	@Autowired MajorDTO major;
+	
+	@Override @Transactional
+	public int add(Map<?,?>map) {
+		member=(MemberDTO) map.get("member");
 		@SuppressWarnings("unchecked")
-		List<MajorDTO>list=(List<MajorDTO>)map.get("major");
-		System.out.println("넘어온 수강과목:"+list);
-		
-		return null;
+		List<MajorDTO> list=(List<MajorDTO>) map.get("list");
+		System.out.println("ID ####"+member.getId());
+		System.out.println("List ####"+list);
+		mapper.insert(member);
+		gmapper.insertMajor(list);
+		int rs=0;		
+		return rs;
 	}
 	//(MemberDAOImpl.getInstance().insert(member).equals("1"))? "성공":"실패"
 		

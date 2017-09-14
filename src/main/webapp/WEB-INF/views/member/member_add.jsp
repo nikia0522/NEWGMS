@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>   
 <jsp:include page="../common/header.jsp"/>
 	<div id="container">
-		<form id="join_form" onsubmit="memberAdd()">
+		<form id="join_form" name="join_form" >
 		<fieldset>
 		<legend>Join information: </legend>
 			<span id="join_id">아이디:</span><input name="id" type="text" placeholder="아이디" /> <br />
@@ -27,41 +27,15 @@
 				<input type="checkbox" name="subject" value="javascript">자스<br />
 				<input type="checkbox" name="subject" value="sql">SQL<br />
 				<input type="checkbox" name="subject" value="python">파이썬<br />			
-				<input id="submit_btn" type="submit" value="Submit" >
+				<button id="submit_btn" type="submit">Submit</button>
 				<input id="reset_btn" type="reset" value="Reset">
 				<input type="hidden" name="action" value="join"/>
 				<input type="hidden" name="page" value="main"/>
 			<hr/>
 		</fieldset>
 		</form>
-		
 <script>
-
-function memberAdd(){
-	var form=document.getElementById('join_form');
-	form.setAttribute('action','${ctx}/member.do');
-	form.setAttribute('method','post');
-	form.submit();
-	return true;
-}
-function addAlert(){
-		var join_id=document.getElementById("join_id").value;
-		var join_pass=document.getElementById("join_pass").value;
-		var join_name=document.getElementById("join_name").value;
-		if(join_id===""){
-			alert('ID는 필수항목입니다.');
-			return false;
-		}
-		if(join_pass===""){
-			alert('PASSWORD를 입력해주세요.');
-			return false;
-		}
-		if(join_name===""){
-			alert('이름은 필수항목입니다.');
-			return false;
-		}
-		
-	}
+app.member.init();
 </script>
-		
+
 	<jsp:include page="../common/footer.jsp"/>

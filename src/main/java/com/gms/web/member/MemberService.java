@@ -11,7 +11,7 @@ import com.gms.web.member.StudentDTO;
 
 @Component
 public interface MemberService {
-	public String addMember(Map<String, Object> map); // 객체에 대한 setter (void, parameter 있음)
+	public int add(Map<?,?>map); // 객체에 대한 setter (void, parameter 있음)
 	public String countMembers(); //getter (return type 있고 parameter 없음)
 	public List<?> list(CommandDTO cmd); //getter (return type 있고 parameter 없음)
 	public StudentDTO findById(CommandDTO cmd); //보안사항이 아니기때문에 public으로..

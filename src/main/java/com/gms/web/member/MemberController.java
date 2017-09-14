@@ -1,6 +1,9 @@
 package com.gms.web.member;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 
@@ -12,10 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.gms.web.command.CommandDTO;
 import com.gms.web.complex.PathFactory;
+import com.gms.web.grade.MajorDTO;
 import com.gms.web.proxy.BlockHandler;
 import com.gms.web.proxy.PageHandler;
 import com.gms.web.proxy.PageProxy;
@@ -34,10 +39,27 @@ public class MemberController {
    @Autowired PageHandler pageHandler;
    @Autowired PageProxy pxy;
       
-   @RequestMapping("/member_add")
-   public String memberAdd() {
+   @RequestMapping(value="/member_add", method=RequestMethod.POST)
+   public String addStudent(@ModelAttribute MemberDTO member, @RequestParam ("subject") List<String> list) {
 	   logger.info("member_add 진입");
-      return "auth:member/member_add.tiles";
+	   logger.info("등록Id:: {}",member.getId());
+	   logger.info("등록이름:: {}",member.getName());
+	   logger.info("등록비번:: {}",member.getPassword());
+	   logger.info("등록과목:: {}",list);
+	   Map<String,Object>paramMap=new HashMap<>();
+	   paramMap.put("member", member);
+	   List<MajorDTO>paramList=new ArrayList<>();
+	   MajorDTO mj=null;
+	   for(String m:list) {
+		   mj=new MajorDTO();
+	   mj.setId(member.getId());
+	   mj.setSubjId(m);
+	   mj.setTitle(m);
+	   paramList.add(mj);
+	   }
+	   paramMap.put("list", paramList);
+	   service.add(paramMap);
+      return "redirect:/member/member_list/1";
    }
    
    @RequestMapping("/member_list/{pageNumber}")

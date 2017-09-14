@@ -232,6 +232,7 @@ app.navbar=(function(){
 app.member=(function(){
 	var init=function(){
 		onCreate();
+		insertStudent();
 	};
 	var onCreate=function(){
 		setContentView();
@@ -249,14 +250,23 @@ app.member=(function(){
 		});
 	};
 	var setContentView=function(){		
-		alert('멤버디테일 진입');
+
+	};
+	var insertStudent=function(){
+		$('#submit_btn').on('click',function(){
+			alert('멤버추가!!');
+			$('#join_form').attr('action',app.path.ctx()+"/member/member_add");
+			$('#join_form').attr('method','post');
+			return true;
+		});
 	};
 	var list=function(pageNumber){
 		location.href=app.path.ctx()+'/member/member_list/'+pageNumber;
 	}
 	return{
 		init : init,
-		list : list
+		list : list,
+		insertStudent : insertStudent
 	};
 })();
 
@@ -295,6 +305,7 @@ app.controller=(function(){
 	var init=function(){
 		updateStudent();
 	};
+		
 	var moveTo=function(dir, page){
 		alert('ssdfgwer'+page);
 		location.href=app.path.ctx()+"/common/"+dir+"/"+page;
@@ -337,7 +348,7 @@ app.controller=(function(){
 		detailStudent : detailStudent,
 		searchStudent : searchStudent
 	};
-})();
+	})();
 
 
 app.home=(function(){
@@ -352,5 +363,4 @@ app.home=(function(){
 	return{
 		init : init
 	};
-
-})();
+	}());
