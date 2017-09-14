@@ -14,9 +14,9 @@ public interface MemberService {
 	public String addMember(Map<String, Object> map); // 객체에 대한 setter (void, parameter 있음)
 	public String countMembers(); //getter (return type 있고 parameter 없음)
 	public List<?> list(CommandDTO cmd); //getter (return type 있고 parameter 없음)
-	public StudentDTO findById(); //보안사항이 아니기때문에 public으로..
+	public StudentDTO findById(CommandDTO cmd); //보안사항이 아니기때문에 public으로..
 	public List<?> findByName(CommandDTO cmd);
-	public String modify(MemberDTO member);
+	public int modify(MemberDTO member);
 	public String remove(CommandDTO cmd);
 	public Map<String,Object> login(CommandDTO cmd);
 

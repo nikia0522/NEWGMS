@@ -12,14 +12,14 @@
 	               	</div>
 	            </div> 
 				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="#">
-						
+					<form id="updateForm" name="member" class="form-horizontal">
+						<input id="id" type="hidden" class="form-control" name="id" value="${student.id}" readonly/>
 						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">ID</label>
+							<label for="name" class="cols-sm-2 control-label">NAME</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input id="name" type="text" class="form-control" name="name"   placeholder=""/>
+									<input id="name" type="text" class="form-control" name="name"   value="${student.name}" readonly/>
 								</div>
 							</div>
 						</div>
@@ -29,7 +29,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input id="email" type="text" class="form-control" name="email"   placeholder=""/>
+									<input id="email" type="text" class="form-control" name="email"   value="${student.email}"/>
 								</div>
 							</div>
 						</div>
@@ -39,7 +39,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input id="phone" type="text" class="form-control" name="phone"   placeholder=""/>
+									<input id="phone" type="text" class="form-control" name="phone"  value="${student.phone}"/>
 								</div>
 							</div>
 						</div>
@@ -49,7 +49,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input id="password" type="password" class="form-control" name="password"  data-toggle="popover" placeholder="Enter your Password"/>
+									<input id="password" type="password" class="form-control" name="password"  data-toggle="popover" value=""/>
 								</div>
 								<span id="result"></span>
 							</div>
@@ -67,14 +67,10 @@
 						</div>
 
 						<div class="form-group ">
-							<button id="confirmBtn" type="button" class="btn btn-primary btn-lg btn-block login-button">UPDATE</button>
+							<input id="confirmBtn" type="submit" class="btn btn-primary btn-lg btn-block login-button" onclick="app.controller.updateStudent()">
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-
-<script>
-	memberUpdate.init();
-	alert('세션 스토리지가 넘어왔으면 폰나옴:'+sessionStorage.getItem('phone'));
-</script>  
+  

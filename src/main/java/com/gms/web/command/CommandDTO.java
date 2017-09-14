@@ -5,15 +5,17 @@ import org.springframework.stereotype.Component;
 
 import com.gms.web.constants.Extension;
 import com.gms.web.constants.Path;
+import com.gms.web.member.MemberDTO;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Lazy @Component @Data
-public class CommandDTO implements Commandable{
+public class CommandDTO{
 	@Getter @Setter
 	protected String action, pageNumber, view, column, search, dir, startRow, endRow, page;
+	protected MemberDTO member;
 	
 	public void setPageNumber(String pageNumber){
 		this.pageNumber=(pageNumber==null)?"1":pageNumber;
@@ -24,7 +26,6 @@ public class CommandDTO implements Commandable{
 		System.out.println("액션:"+action);
 		
 	}
-	@Override
 	public void process() {
 		this.view= 
 				(dir.equals("home"))?"/WEB-INF/view/common/home.jsp":Path.VIEW +dir+Path.SEPARATOR+page+Extension.JSP;

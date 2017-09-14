@@ -22,6 +22,20 @@
 			  from student s, (select @rnum := 0) b 
 			  where name like '%${search}%' 
 			  order by num desc) t2  
-		
+	</select>
+	<update id="update" parameterType="com.gms.web.member.MemberDTO">
+	UPDATE Member SET 
+		email=#{email},
+		phone=#{phone},
+		password=#{password}	
+	WHERE member_id = #{id}
+	
+	</update>
+	<delete id="deleteMember" parameterType="com.gms.web.command.CommandDTO">
+	DELETE FROM Member WHERE member_id like #{action}
+	</delete>
+	
+	<select id="selectById" resultType="com.gms.web.member.StudentDTO" parameterType="com.gms.web.command.CommandDTO"> 
+	SELECT id, name, phone, email, subjects, ssn FROM Student WHERE id like #{search}
 	</select>
 </mapper>

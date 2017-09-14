@@ -1,0 +1,7 @@
+동적 SQL를 처리하는 방법
+
+OGNL(Object-Graph Navigation Language) 기반의 표현식
+-if
+-choose(when, otherwise)
+-trim(where,set)
+-foreach

@@ -48,8 +48,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public StudentDTO findById() {
-		return null;
+	public StudentDTO findById(CommandDTO cmd) {
+		return mapper.selectById(cmd);
 	}
 
 	@Override
@@ -59,17 +59,15 @@ public class MemberServiceImpl implements MemberService{
 		}
 
 	@Override
-	public String modify(MemberDTO member) {		
-		String msg="";
-		/*		int rs=Integer.parseInt(MemberDAOImpl.getInstance().updatePass(member));
-		return (rs==1)?"성공":"실패";*/
-		return msg;
+	public int modify(MemberDTO member) {		
+
+		return mapper.update(member);
 	}
 	
 	@Override
 	public String remove(CommandDTO cmd) {
 		int rs=0;
-		return (rs==1)?"실패":"성공";
+		return String.valueOf(mapper.deleteMember(cmd));
 	}
 	@Override
 	public Map<String,Object> login(CommandDTO cmd) {

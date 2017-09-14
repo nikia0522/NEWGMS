@@ -238,13 +238,14 @@ app.member=(function(){
 		$('#updateBtn').on('click',function(){
 			//id,phone,email,title
 			
-			sessionStorage.setItem('id', $('#detail_id').text()); 
+/*			sessionStorage.setItem('id', $('#detail_id').text()); 
 			sessionStorage.setItem('phone', $('#detail_phone').text());
 			alert($('#detail_phone').text());
 			sessionStorage.setItem('email', $('#detail_email').text());
-			sessionStorage.setItem('title', $('#detail_title').text());			
+			sessionStorage.setItem('title', $('#detail_title').text());			*/
+			alert('업데이트 버튼 클릭 !!');
 			controller.moveTo('member','member_update');
-			
+		
 		});
 	};
 	var setContentView=function(){		
@@ -292,10 +293,11 @@ app.grade =(function(){
 
 app.controller=(function(){
 	var init=function(){
-
+		updateStudent();
 	};
 	var moveTo=function(dir, page){
-		location.href=app.path.ctx()+"/common/path"+"/"+dir+"/"+page;
+		alert('ssdfgwer'+page);
+		location.href=app.path.ctx()+"/common/"+dir+"/"+page;
 	};
 	var logout=function(dir,page){
 		location.href=app.path.ctx()+'/'+dir+".do?action=logout&page="+page;
@@ -303,17 +305,21 @@ app.controller=(function(){
 	var deleteTarget=function(target){
 		prompt(target+"의 ID?");
 	};
-	var updateStudent=function(id,email){
-		alert('수정할 id='+$('#detail_id').text());
-		location.href=app.ctx()+'/'+"member.do?action=update&page=member_update&id="+id+"&email="+email;
+	var updateStudent=function(){		
+	
+		alert('수정하기로 가기 id');
+		$('#updateForm').attr('action',app.path.ctx()+"/member/member_update");
+		$('#updateForm').attr('method','post');
+		return true;
+
 	};
 	var deleteStudent=function(id){
 		alert('삭제할 id='+id);
-		location.href=app.ctx()+'/'+"member.do?action=delete&page=member_list&id="+id;
+		location.href=app.path.ctx()+'/member/delete/'+id;
 	};
 	var detailStudent=function(id){
 		alert('조회할 id='+id);
-		location.href=app.path.ctx()+'/'+"member.do?action=detail&page=member_detail&id="+id;
+		location.href=app.path.ctx()+'/member/detail/'+id;
 	};
 	var searchStudent=function(){
 		alert('검색버튼 클릭함');

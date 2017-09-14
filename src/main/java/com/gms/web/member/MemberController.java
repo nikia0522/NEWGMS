@@ -8,10 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.gms.web.command.CommandDTO;
+import com.gms.web.complex.PathFactory;
 import com.gms.web.proxy.BlockHandler;
 import com.gms.web.proxy.PageHandler;
 import com.gms.web.proxy.PageProxy;
@@ -19,11 +23,13 @@ import com.google.common.util.concurrent.Service;
 
 
 @Controller
-@RequestMapping("/member")
+@SessionAttributes("student")
+@RequestMapping({"/member", "/student"})
 public class MemberController {
    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
    @Autowired MemberService service;
    @Autowired CommandDTO cmd;
+   @Autowired MemberDTO member;
    @Autowired BlockHandler blockHandler;
    @Autowired PageHandler pageHandler;
    @Autowired PageProxy pxy;
@@ -82,8 +88,30 @@ public class MemberController {
 	   return "auth:member/member_list.tiles";
    }
    
-   @RequestMapping("/delete")
-   public String memberDelete(Model model) {
-      return "auth:member/member_delete.tiles";
+   @RequestMapping("/detail/{id}")
+   public String memberDetail(Model model, @PathVariable String id) {
+	   logger.info("member detail 진입! hooooray~!");
+	   cmd.setSearch(id);
+	   service.findById(cmd);
+	   model.addAttribute("search", cmd.getSearch());
+	   model.addAttribute("student", service.findById(cmd));
+	   return "auth:member/member_detail.tiles";
+   }
+   
+   @RequestMapping("/delete/{id}")
+   public String memberDelete(Model model, @PathVariable String id) {
+	   logger.info("member delete 진입! yay!");
+	   System.out.println("넘어온 아이디 %%%%%%"+id);
+	   cmd.setAction(id);
+	   service.remove(cmd);
+       return "redirect:/member/member_list/1";
+   }
+   
+   @RequestMapping(value="/member_update")
+   public String updateStudent(@ModelAttribute MemberDTO member) {
+	   logger.info("넘어온 아이디::{}",member.getId());
+	   logger.info("member update 진입!!!!");
+	   service.modify(member);
+	   return "redirect:/member/detail/"+member.getId();
    }
 }

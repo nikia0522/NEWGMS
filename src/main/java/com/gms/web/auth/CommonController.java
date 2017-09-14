@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/common")
 public class CommonController {
 	private static final Logger logger = LoggerFactory.getLogger(CommonController.class);
-	@RequestMapping("/path/{directory}/{page}")
+	@RequestMapping("/{directory}/{page}")
 	public String move(@PathVariable String directory, @PathVariable String page) {
 		logger.info("common controller 진입");
 		return String.format("auth:%s/%s.tiles", directory, page);

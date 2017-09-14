@@ -36,13 +36,13 @@
 <%-- 		<td><fmt:formatNumber value="${i.num}" pattern="."></td> --%>
 		<td style="width:5%">${i.num}</td>
 		<td style="width:10%">${i.id}</td>
-		<td style="width:10%"><a onclick="controller.detailStudent('${i.id}')">${i.name}</a></td>
+		<td style="width:10%"><a onclick="app.controller.detailStudent('${i.id}')">${i.name}</a></td>
 		<td style="width:10%">${i.ssn}</td>
 		<td style="width:15%">${i.phone}</td>
 		<td style="width:10%">${i.email}</td>
 		<td style="width:10%">${i.subjects}</td>
 		<td style="width:10%">${i.regdate}</td>
-		<td style="width:10%"><a onclick="updateStudent('${i.id}')">수정</a>/<a onclick="deleteStudent('${i.id}')">삭제</a></td>
+		<td style="width:10%"><a onclick="app.controller.updateStudent('${i.id}')">수정</a>/<a onclick="app.controller.deleteStudent('${i.id}')">삭제</a></td>
 		
 	</tr>
 	</c:forEach>
