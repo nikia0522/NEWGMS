@@ -239,6 +239,7 @@
     <groupId>org.aspectj</groupId>
 	    <artifactId>aspectjweaver</artifactId>
 	    <version>1.8.10</version>
+	    
 	</dependency>
 	
 	<!-- Jackson -->
