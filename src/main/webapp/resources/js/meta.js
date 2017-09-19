@@ -16,182 +16,53 @@ meta.common = (function(){
 })();
 
 meta.index=(function(){
-   var init=function(){
-      onCreate();
+   var $wrapper,temp,img,algo,js,ctx;
+	var init=function(){
+      js=$$('j');
+      temp=js+'/template.js';
+      algo=js+'/algo.js';
       meta.ui.init();
+      onCreate();
    };
    var onCreate=function(){
-      setContentView();
+	     $wrapper=$('#wrapper');
+	      ctx=$$('x');
+	      img=$$('i');
+	      $.getScript(temp,x=>{
+	    	  var $image=$('<img/>', 
+	    			  intro.loading(img)	  
+	    	  );    	       
+	    	  $wrapper.append($image);
+	      var $btn=$('<input/>',
+	    		  {id: 'btn',
+	    	  type: 'button',
+	    	  value: '버튼3'
+	    		  }
+	      );
+	      $('#loading').after($btn);
       $('#btn').click(()=>{
          $wrapper.empty();
          //meta.auth.init();
          meta.ui.navbar();
+         meta.navbar.init();
          meta.ui.arithmetic();	
          $('#resultBtn').click(()=>{
-            $('#result').text('결과:'	+meta.algo.arithmetic(
+            $('#result').text('결과:'	+series.arithmetic(
                $('#start').val(),
                $('#end').val()
             ));
             });
-         $('#arithBtn').click(()=>{
-            alert('등차수열 클릭');
-            $('#content').empty();
-            meta.ui.arithmetic();         
-         $('#resultBtn').click(()=>{
-            $('#result').text('결과:'   +meta.algo.arithmetic(
-               $('#start').val(),
-               $('#end').val()
-               ));
-               });
-         });
-         $('#switchBtn').click(()=>{
-            alert('스위치 클릭');
-            $('#content').empty();
-            meta.ui.arithmetic();
-            $('h1').html('1부터 100 스위치수열 합');
-            $('#start').val('1');
-            $('#end').val('100');
-         $('#resultBtn').click(()=>{
-            $('#result').text('결과:'   +meta.algo.switchSeries(
-                  ));
-            });
-         });
-         $('#geoBtn').click(()=>{
-            alert('등비수열 클릭');
-            $('#content').empty();
-            meta.ui.arithmetic();
-            $('h1').html('등비수열의 합');
-            $('#last_num').html('몇번째까지?');
-            $('#start').val('1').attr('readonly','true');
-            $('#resultBtn').click(()=>{
-               $('#result').text('결과:'   +meta.algo.geometric(
-                     $('#end').val()
-               ));
-               });
-            
-         });
-         $('#facBtn').click(()=>{
-            alert('팩토리얼 클릭');
-            $('#content').empty();
-            meta.ui.arithmetic();
-            $('h1').html('팩토리얼~');
-            $('#last_num').html('몇번째까지?');
-            $('#start').val('1').attr('readonly','true');
-            $('#resultBtn').click(()=>{
-            	$('#result').text('결과:'+meta.algo.factorial(
-            			$('#end').val()
-            	));
-            });
-         });
-         $('#fiboBtn').click(()=>{
-            alert('피보나치 클릭');
-            $('#content').empty();
-            meta.ui.arithmetic();
-            $('h1').html('Fibonacci~~');
-            $('#last_num').html('몇번째까지?');
-            $('#start').val('1').attr('readonly','true');
-            $('#resultBtn').click(()=>{
-            	$('#result').text('결과:'+meta.algo.fibonacci(
-            		$('#end').val()	
-            	));
-            });
-         });
-   
-         
+
+      });
          
       });
    };
-   var setContentView=()=>{
-      $wrapper=$('#wrapper');
-      ctx=$$('x');
-      img=$$('i');
-      var $image=$('<img/>', 
-         {   img: 'loading',
-            src: img+'/loading.gif'
-         }
-      );
-      $image.appendTo($wrapper);      
-      
-      var $btn=$('<input/>',
-         {id: 'btn',
-         type: 'button',
-         value: '버튼3'
-         }
-      );
-      $wrapper.append($btn);
+   var setContentView=()=>{ 
    };
    return {
       init : init
    };
 })();
-meta.algo={
-      arithmetic : (f,l)=>{
-         var sum=0;
-         var start=f*1;
-         var end=l*1;
-         for(var i=start;i<=end;i++){
-            sum+=i;
-         }         
-      return sum;
-      },
-      switchSeries :()=>{
-         var sum=0;
-         var sw=0;
-         var start=0;
-         do{
-            start++;
-         if(sw==0){
-            sum+=start;
-            sw=1;
-         }else{
-            sum-=start;
-            sw=0;
-         }}
-         while(start<100);
-         return sum;
-      },
-      geometric:(n)=>{
-         var j=1;
-         var i=0;
-         var sum=0;
-         
-         do{
-	         j+=i;
-	         sum+=j;
-	         i++;
-         }while(i<n);
-         return sum;
-      },
-      factorial:(n)=>{
-    	  var i=1;
-    	  var j=1;
-    	  var sum=0;   	  
-      	  do{
-      		 j*=i;
-      		 i++;
-      		 sum+=j;
-      	  }while(i<=n);
-    	  return sum;
-      },
-      fibonacci:(n)=>{
-    	  var sum, count, c;
-    	  var a=1;
-    	  var b=1;
-    	  sum=2; count=2;
-    	  while(1){
-    		  c=a+b;
-    		  sum+=c;
-    		  count++;
-    		  if(count<n){
-    			  a=b;
-    			  b=c;
-    		  }else{
-    			  return sum;
-    			  break;
-    		  }
-    	  }
-      }
-};
 
 meta.auth=(function(){
    var $wrapper,ctx,img,js,css;
@@ -234,6 +105,169 @@ meta.auth=(function(){
        init : init
       };
    })();
+
+
+meta.navbar=(function(){
+	var algo, js;
+	var init=function(){
+		onCreate();
+		js=$$('j');
+		algo=js+'/algo.js';
+	};
+	var onCreate=function(){
+		setContentView();
+			
+	};
+	var setContentView=function(){		
+		var $u1=$('#navbar_ul_stu');
+		var $u2=$('#navbar_ul_grade');
+		var $u3=$('#navbar_ul_board');
+		var $logout=$('#logout');
+		$u1.addClass("dropdown-menu");
+		$u2.addClass("dropdown-menu");
+		$u3.addClass("dropdown-menu");
+		
+		$('#go_main').on('click',function(){
+			app.controller.moveTo('/auth','/login');
+		});
+		$('.dropdown-menu a').eq( 0 ).on('click',function(){
+			alert('0');
+			app.controller.moveTo('member', 'member_add');
+		});
+		$('.dropdown-menu a').eq( 1 ).on('click',function(){
+			alert('1');
+			app.member.list(1);
+		});
+		$('.dropdown-menu a').eq( 2 ).on('click',function(){
+			app.controller.moveTo('member', 'member_detail');
+		});
+		$('.dropdown-menu a').eq( 3 ).on('click',function(){
+			app.controller.moveTo('member', 'member_update');
+		});
+		$('.dropdown-menu a').eq( 4 ).on('click',function(){
+			app.controller.moveTo('member', 'member_delete');
+		});
+		$('.dropdown-menu a').eq( 5 ).on('click',function(){
+			app.controller.moveTo('grade', 'grade_add');
+		});
+		$('.dropdown-menu a').eq( 6 ).on('click',function(){
+			app.controller.moveTo('grade', 'grade_list');
+		});
+		$('.dropdown-menu a').eq( 7 ).on('click',function(){
+			app.controller.moveTo('grade', 'grade_detail');
+		});
+		$('.dropdown-menu a').eq( 8 ).on('click',function(){
+			app.controller.moveTo('grade', 'grade_update');
+		});
+		$('.dropdown-menu a').eq( 9 ).on('click',function(){
+			app.controller.moveTo('grade', 'grade_delete');
+		});
+		$('.dropdown-menu a').eq( 10 ).on('click',function(){
+			app.controller.moveTo('board', 'board_add');
+		});
+		$('.dropdown-menu a').eq( 11 ).on('click',function(){
+			app.controller.moveTo('board', 'board_list');
+		});
+		/*$('.dropdown-menu a').eq( 12 ).on('click',function(){
+			app.controller.moveTo('board', 'board_detail');
+		});
+		$('.dropdown-menu a').eq( 13 ).on('click',function(){
+			app.controller.moveTo('board', 'board_update');
+		});
+		$('.dropdown-menu a').eq( 14 ).on('click',function(){
+			app.controller.moveTo('board', 'board_delete');
+		});*/
+        $('#arithBtn').click(()=>{
+            alert('등차수열 클릭');
+            $.getScript(algo,()=>{
+            	series.arithmetic('hello aritotles@!');
+            });
+            $('#content').empty();
+            meta.ui.arithmetic();         
+            $('#resultBtn').click(()=>{
+        	 $.getScript(algo,(f,l)=>{
+        		 $('#result').text('결과:'+series.arithmetic(
+        				 $('#start').val(),
+        				 $('#end').val()
+        		 		));	 
+        	 		});
+               });
+         });
+         $('#switchBtn').click(()=>{
+            alert('스위치 클릭');
+            $.getScript(algo,()=>{
+            	series.switchSeries('hello switch@!');
+            });
+            $('#content').empty();
+            meta.ui.arithmetic();
+            $('h1').html('1부터 100 스위치수열 합');
+            $('#start').val('1');
+            $('#end').val('100');
+         $('#resultBtn').click(()=>{
+        	 $.getScript(algo,()=>{
+        		 $('#result').text('결과:'   +series.switchSeries(
+        		 	));
+        	 	});      		 
+        	 });
+         });
+         $('#diffBtn').click(()=>{
+            alert('등비수열 클릭');
+            $('#content').empty();
+            meta.ui.arithmetic();
+            $('h1').html('등비수열의 합');
+            $('#last_num').html('몇번째까지?');
+            $('#start').val('1').attr('readonly','true');
+            $('#resultBtn').click(()=>{
+            	$.getScript(algo,(n)=>{
+/*            		series.diffSeries('hello diff@!');*/
+            		$('#result').text('결과:' +series.diffSeries(
+            				$('#end').val()
+            		));
+            	});
+            	});
+         });
+         $('#facBtn').click(()=>{
+            alert('팩토리얼 클릭');
+            $.getScript(algo,(n)=>{
+            	series.factorial('hello factorial');
+            });
+            $('#content').empty();
+            meta.ui.arithmetic();
+            $('h1').html('팩토리얼~');
+            $('#last_num').html('몇번째까지?');
+            $('#start').val('1').attr('readonly','true');
+            $('#resultBtn').click(()=>{
+            	$('#result').text('결과:'+series.factorial(
+            			$('#end').val()
+            	));
+            });
+         });
+         $('#fiboBtn').click(()=>{
+            alert('피보나치 클릭');
+            $.getScript(algo,(n)=>{
+            	series.fibonacci('helllo fibo');
+            });
+            $('#content').empty();
+            meta.ui.arithmetic();
+            $('h1').html('Fibonacci~~');
+            $('#last_num').html('몇번째까지?');
+            $('#start').val('1').attr('readonly','true');
+            $('#resultBtn').click(()=>{
+            	$('#result').text('결과:'+series.fibonacci(
+            		$('#end').val()	
+            	));
+            });
+         });
+         $('#logout').on('click', function(){
+        	 app.controller.moveTo('/auth', '/login_view');
+         });
+   
+	};
+	
+	return{
+		init : init
+	};
+})();
 meta.ui=(function(){
    var $wrapper,ctx,img,js,css;
    var init=function(){
@@ -300,7 +334,7 @@ meta.ui=(function(){
        +'      <ul id="navbar_drop_board" class="dropdown-menu">'
        +'      <li><a id="arithBtn">등차수열</a></li>'
        +'      <li><a id="switchBtn">스위치수열</a></li>'
-       +'      <li><a id="geoBtn">등비수열 </a></li>'
+       +'      <li><a id="diffBtn">등비수열 </a></li>'
        +'      <li><a id="facBtn">팩토리얼</a></li>'
        +'      <li><a id="fiboBtn">피보나치</a></li>'
        +'      </ul>'
