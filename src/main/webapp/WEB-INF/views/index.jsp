@@ -11,7 +11,9 @@
  	<script src="${path.js}/meta.js"></script>
 </head>
 <body>
-<div id="wrapper"></div>
+<div id="wrapper">
+</div>
+
 </body>
 <script>
 meta.common.init('${path.ctx}');
