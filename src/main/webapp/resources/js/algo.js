@@ -67,3 +67,37 @@ var series={
 	    	  }
 	      }
 }
+
+var sort={
+/*		//selection
+		selection : (sortList)=>{
+			console.log('start'+sortList);
+			var m,i,j,j,x;
+			var p=sortList;
+			m=-1;
+			do{
+				m++
+			}while(m<4);
+			i=-1;
+			do{i++; j=1;
+				do{j++ 
+					if(sortList[i]*>sortList[j]*1){
+						k=sortList[i;]
+					}
+					}while()
+					}while();
+			return 'selection';
+		},*/
+		//burble
+		burble : ()=>{
+			return 'burble';
+		},
+		//insertion
+		insertion : ()=>{
+			return 'insertion';
+		},
+		//ranking
+		ranking : ()=>{
+			return 'ranking';
+		}
+}

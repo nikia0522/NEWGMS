@@ -12,6 +12,8 @@
 </head>
 <body>
 <div id="wrapper">
+	<div id="navbar"></div>
+	<div id="container"></div>
 </div>
 
 </body>
